@@ -1,6 +1,7 @@
 const Cast = require('../util/cast');
 const MathUtil = require('../util/math-util');
 const Timer = require('../util/timer');
+const Looks = require('./scratch3_looks');
 
 class Scratch3MotionBlocks {
     constructor (runtime) {
@@ -64,9 +65,11 @@ class Scratch3MotionBlocks {
     moveSteps (args, util) {
         const steps = Cast.toNumber(args.STEPS);
         const radians = MathUtil.degToRad(90 - util.target.direction);
+        const looks = new Looks(this.runtime);
         const dx = steps * Math.cos(radians);
         const dy = steps * Math.sin(radians);
         util.target.setXY(util.target.x + dx, util.target.y + dy);
+        looks.say({MESSAGE: "Moved!"}, util);
     }
 
     goToXY (args, util) {
